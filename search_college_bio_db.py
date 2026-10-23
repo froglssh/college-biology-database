@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 大學生物資料庫 (College Biology Academic Database) - 跨書跨庫快速檢索工具
-依據 /Users/froglssh/Library/CloudStorage/GoogleDrive-frog@lssh.tp.edu.tw/我的雲端硬碟/04生物教學/bio
-典藏之世界經典大學生物教材建立
+依據：
+1. /Users/froglssh/Library/CloudStorage/GoogleDrive-frog@lssh.tp.edu.tw/我的雲端硬碟/04生物教學/bio
+2. /Users/froglssh/Library/CloudStorage/GoogleDrive-frog@lssh.tp.edu.tw/我的雲端硬碟/網路圖書/生物學
+典藏之世界經典大學生物、醫學、生理、分生、動物、數理教材完整整編建立
 """
 import os, sys, argparse, re
 
@@ -14,7 +16,11 @@ MODULE_MAP = {
     2: ("02_動物學與生物多樣性庫", "動物學庫 (Miller-Harley Zoology, Hickman Animal Diversity)"),
     3: ("03_生物化學與分子生理庫", "生化分子生理庫 (王鏡岩《生物化學》, 生殖生物學)"),
     4: ("04_數理生物學與科研方法庫", "數理生物與科研方法 (J.D. Murray, Biological Physics, How Science Works)"),
-    5: ("05_MacMillan生物科學百科索引", "MacMillan 百科全書 (Richard Robinson Vol 1-4)")
+    5: ("05_MacMillan生物科學百科索引", "MacMillan 百科全書 (Richard Robinson Vol 1-4)"),
+    6: ("06_人體解剖生理與臨床醫學庫", "人體解剖生理庫 (Ross & Wilson, Elaine Marieb, Human Physiology)"),
+    7: ("07_基因工程與分子選殖聖經庫", "基因工程選殖庫 (T.A. Brown《Gene Cloning》, Christopher Howe, 癌症生物學)"),
+    8: ("08_醫學生物化學與身心生理庫", "醫學生化身心生理庫 (BRS Biochemistry, Taylor Health Psychology HPA軸)"),
+    9: ("09_真菌學與生態百科辭典庫", "真菌學與生態辭典庫 (Fungi: Bio & Apps, Ecological Dictionary, Encyclopedia)")
 }
 
 def scan_markdown_files(target_dir):
@@ -26,20 +32,22 @@ def scan_markdown_files(target_dir):
     return files
 
 def search_database(query="", module_filter=None, book_filter="", curriculum_filter=""):
-    print("\n" + "=" * 65)
-    print(" 🔍 大學生物資料庫 (College Biology Database) 檢索結果")
+    print("\n" + "=" * 70)
+    print(" 🔍 大學生物資料庫 (College Biology Database) 全球館藏檢索")
     if query: print(f" 關鍵字: '{query}'")
     if module_filter: print(f" 子庫篩選: Module {module_filter} - {MODULE_MAP[module_filter][1]}")
     if book_filter: print(f" 典藏書目: '{book_filter}'")
     if curriculum_filter: print(f" 高中課綱對接: '{curriculum_filter}'")
-    print("=" * 65 + "\n")
+    print("=" * 70 + "\n")
 
     target_dirs = []
     if module_filter and module_filter in MODULE_MAP:
         target_dirs.append(os.path.join(DB_DIR, MODULE_MAP[module_filter][0]))
     else:
         for m in MODULE_MAP:
-            target_dirs.append(os.path.join(DB_DIR, MODULE_MAP[m][0]))
+            p = os.path.join(DB_DIR, MODULE_MAP[m][0])
+            if os.path.exists(p):
+                target_dirs.append(p)
         target_dirs.append(DB_DIR)  # Also include root guidance files
 
     matched_sections = 0
@@ -81,7 +89,7 @@ def search_database(query="", module_filter=None, book_filter="", curriculum_fil
                 if q_match:
                     if not file_printed:
                         print(f"📘 檔案路徑: {rel_path}")
-                        print("-" * 65)
+                        print("-" * 70)
                         file_printed = True
 
                     matched_sections += 1
@@ -89,7 +97,7 @@ def search_database(query="", module_filter=None, book_filter="", curriculum_fil
                     lines = sec.strip().split("\n")[1:8]
                     for l in lines:
                         if l.strip():
-                            print(f"   {l.strip()[:110]}")
+                            print(f"   {l.strip()[:115]}")
                     print("   ...\n")
 
     if matched_sections == 0:
@@ -99,20 +107,21 @@ def search_database(query="", module_filter=None, book_filter="", curriculum_fil
 
 def main():
     parser = argparse.ArgumentParser(description="大學生物資料庫快速檢索工具 (College Biology Academic DB)")
-    parser.add_argument("-q", "--query", type=str, default="", help="關鍵字檢索 (例如: 米氏常數, 逆流倍增, 羊膜卵, SIR模型)")
-    parser.add_argument("-m", "--module", type=int, choices=range(1, 6), default=None, help="依子庫模組篩選 (1: 普生, 2: 動物學, 3: 生化, 4: 數理生物, 5: 百科)")
-    parser.add_argument("-b", "--book", type=str, default="", help="依教材名稱篩選 (例如: Campbell, Raven, Miller-Harley, 王鏡岩, Murray)")
+    parser.add_argument("-q", "--query", type=str, default="", help="關鍵字檢索 (例如: 藍白斑篩選, Starling, p53, HPA軸, 幾丁質)")
+    parser.add_argument("-m", "--module", type=int, choices=range(1, 10), default=None, help="依子庫模組篩選 (1-9)")
+    parser.add_argument("-b", "--book", type=str, default="", help="依教材名稱篩選 (例如: Brown, Ross, Marieb, Hesketh, Taylor, Murray)")
     parser.add_argument("-c", "--curriculum", type=str, default="", help="依高中課綱對應模組篩選 (例如: 必修生物, 選修生物I, 選修生物II, 選修生物III, 探究實作)")
 
     args = parser.parse_args()
 
     if not args.query and args.module is None and not args.book and not args.curriculum:
         print("提示：請輸入檢索關鍵字或篩選參數。範例：")
-        print("  python3 search_college_bio_db.py -q '酵素動力學'")
-        print("  python3 search_college_bio_db.py -m 2 -q '體腔'")
-        print("  python3 search_college_bio_db.py -c '選修生物I'")
-        print("  python3 search_college_bio_db.py --book 'Murray'\n")
-        search_database(query="水勢")
+        print("  python3 search_college_bio_db.py -q '藍白斑'")
+        print("  python3 search_college_bio_db.py -m 6 -q '水腫'")
+        print("  python3 search_college_bio_db.py -m 7 -q 'p53'")
+        print("  python3 search_college_bio_db.py --book 'Brown' -q 'PCR'")
+        print("  python3 search_college_bio_db.py -c '選修生物II'\n")
+        search_database(query="質體")
         return
 
     search_database(query=args.query, module_filter=args.module, book_filter=args.book, curriculum_filter=args.curriculum)
