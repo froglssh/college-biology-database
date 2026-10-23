@@ -1,15 +1,37 @@
 # 01 普通生物學核心庫 (General Biology Core Database)
 
-本庫整合了資料夾中五部最具代表性的普通生物學教材與先修參考手冊：
-1. **Campbell Biology (12th Edition)**：全球普通生物學黃金標準，全 56 章體系最完備。
-2. **Raven & Johnson's Biology (6th Edition)**：以植物演化、生態適應輻射與巨演化見長的巨著。
-3. **Discover Biology (2nd Edition - Cain et al.)**：重視概念統一性、演化案例與生態思維。
-4. **Biology: Science for Life (Belk & Borden)**：以真實生活議題為驅動的情境式教材，高中探究與實作命題寶庫。
-5. **CliffsAP Biology & QuickStudy Biology**：普生核心考點、數值常數與圖表速查手冊。
+本庫全面整編全球最具權威性的大學普通生物學教材、最新版本前沿研究與高中加深加廣先修體系，核心涵蓋：
+1. **Campbell Biology (13th Edition, 2024)**：全書 8 大單元、56 章深度學理機制與教學迷思概念解構，並提供 108 課綱雙向對照表與視覺化網頁界面。
+2. **Campbell Biology (12th Edition)**：全 56 章體系架構與全文字版焦點。
+3. **Raven & Johnson's Biology (6th Edition)**：以植物演化、生態適應輻射與巨演化見長的巨著。
+4. **Discover Biology (2nd Edition - Cain et al.)**：重視概念統一性、演化案例與生態思維。
+5. **Biology: Science for Life (Belk & Borden)**：以真實生活議題為驅動的情境式教材，高中探究與實作命題寶庫。
+6. **CliffsAP Biology & QuickStudy Biology**：普生核心考點、數值常數與圖表速查手冊。
 
 ---
 
 ## 本庫檔案清單與功能
+
+### 一、Campbell Biology 13th Edition 核心單元庫 (`units/`)
+
+| 單元名稱 | 涵蓋章節 | 核心學術深化主題與亮點 | 對應檔案 |
+|---|---|---|---|
+| **Unit 1 生命的化學基礎** | Ch 01–05 | 水勢物理本質與氫鍵網絡、碳化合物立體異構、蛋白質四級摺疊熱力學、AlphaFold2 結構預測 | [`units/Unit01_生命的化學基礎_Ch01-05.md`](./units/Unit01_生命的化學基礎_Ch01-05.md) |
+| **Unit 2 細胞生物學** | Ch 06–12 | 膜流動鑲嵌與通道門控、代謝自由能 $\Delta G$、ATP 合酶旋轉催化、光反應 Z-Scheme 與循環電子流、CDK-Cyclin 振盪與紡錘體檢核點 (SAC) | [`units/Unit02_細胞生物學_Ch06-12.md`](./units/Unit02_細胞生物學_Ch06-12.md) |
+| **Unit 3 遺傳學與分子生物學** | Ch 13–21 | 聯會複合體與 Holliday 交叉、非孟德爾遺傳非等位基因交互作用、真核轉錄起始前複合體 (PIC)、lac/trp 操縱組、CRISPR 鹼基編輯與單細胞定序 | [`units/Unit03_遺傳學與分子生物學_Ch13-21.md`](./units/Unit03_遺傳學與分子生物學_Ch13-21.md) |
+| **Unit 4 演化機制** | Ch 22–25 | 哈溫平衡五大因子微分偏離、適應性地貌與多倍體物種形成、宏觀演化異速生長與同源異形基因 (Hox) | [`units/Unit04_演化機制_Ch22-25.md`](./units/Unit04_演化機制_Ch22-25.md) |
+| **Unit 5 生命多樣性演化史** | Ch 26–34 | 分子時鐘與 Asgard 古菌內共生、真核生物最新超群系統、陸生植物世代交替配子體退化、原口 vs 後口動物體腔演化 | [`units/Unit05_生命多樣性演化史_Ch26-34.md`](./units/Unit05_生命多樣性演化史_Ch26-34.md) |
+| **Unit 6 植物形態與生理** | Ch 35–39 | 頂端分生組織組織原學說、水勢方程式 ($\Psi = \Psi_s + \Psi_p$)、韌皮部壓力流假說詳細動力、氣孔開閉離子通道、光敏素 $P_r/P_{fr}$ 與臨界夜長 | [`units/Unit06_植物形態與生理_Ch35-39.md`](./units/Unit06_植物形態與生理_Ch35-39.md) |
+| **Unit 7 動物形態與生理** | Ch 40–51 | 恆定性設定點理論、心血管流體力學與逆流交換、亨利氏環逆流倍增系統、動作電位離子通道門控狀態與跳躍傳導、肌絲滑行跨橋週期 | [`units/Unit07_動物形態與生理_Ch40-51.md`](./units/Unit07_動物形態與生理_Ch40-51.md) |
+| **Unit 8 生態學與保育** | Ch 52–56 | 族群成長微分模型（$r_{\max}$ 與 $K$）、群集競爭排斥與生態位分化、能量傳遞效率與生物地球化學循環、全球變遷與微塑料污染評估 | [`units/Unit08_生態學與保育_Ch52-56.md`](./units/Unit08_生態學與保育_Ch52-56.md) |
+
+### 二、108 課綱對照與前沿新版專題
+
+- [`13th新版前沿亮點總覽.md`](./13th新版前沿亮點總覽.md)：彙整 2024 年第 13 版最新加入之 AI 蛋白質結構預測、微塑料生態毒理、類器官與最新基因治療技術。
+- [`高中生物補充對照表.md`](./高中生物補充對照表.md)：108 課綱（高一必修、選修生物 I~IV、探究與實作）與 Campbell 13th 56 章節雙向對應與命題安全邊界手冊。
+- [`index.html`](./index.html)：大學普通生物學補充知識庫專屬**視覺化網頁瀏覽工具**，支援響應式導覽、單元切換、前沿亮點與迷思概念即時查閱。
+
+### 三、其他普生經典教材專題庫
 
 - [`Campbell_12th_章節架構與深化焦點.md`](./Campbell_12th_章節架構與深化焦點.md)：56 章全架構導覽、文字版章節對照與高中對應深度解析。
 - [`Raven_Johnson_植物演化特色對照.md`](./Raven_Johnson_植物演化特色對照.md)：Raven 經典植物生長、維管束組織形成、世代交替演化特點。

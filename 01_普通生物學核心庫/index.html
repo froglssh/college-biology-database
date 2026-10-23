@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大學普通生物學補充知識庫 | Campbell Biology 13th 補充高中生物教學</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #1a5235;
+      --secondary-color: #2e7d32;
+      --accent-color: #e8f5e9;
+      --dark-text: #1f2937;
+      --light-bg: #f8fafc;
+      --sidebar-width: 320px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      color: var(--dark-text);
+      background-color: var(--light-bg);
+      line-height: 1.7;
+    }
+    .sidebar {
+      width: var(--sidebar-width);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      overflow-y: auto;
+      padding: 1.5rem 1rem;
+      z-index: 1000;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 2.5rem 3.5rem;
+      max-width: 1100px;
+    }
+    .kb-badge-safe {
+      background-color: #fee2e2;
+      color: #991b1b;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      border: 1px solid #fecaca;
+    }
+    .unit-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      padding: 1.75rem;
+      margin-bottom: 1.75rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .unit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    .nav-link {
+      color: #4b5563;
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-color);
+      background-color: var(--accent-color);
+      font-weight: 600;
+    }
+    .misconception-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+    .deepdive-box {
+      background-color: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+    .update-13th-box {
+      background-color: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+    .search-box {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding-bottom: 1rem;
+      z-index: 10;
+    }
+    code {
+      color: #b91c1c;
+      background-color: #f3f4f6;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    @media (max-width: 992px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 側邊導航欄 -->
+  <aside class="sidebar">
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <i class="bi bi-journal-bookmark-fill text-success fs-3"></i>
+      <div>
+        <h5 class="mb-0 fw-bold" style="color: var(--primary-color);">大學普生補充庫</h5>
+        <small class="text-muted">Campbell Biology 13th</small>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <div class="input-group">
+        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+        <input type="text" id="searchInput" class="form-control bg-light border-start-0" placeholder="搜尋普生概念/關鍵字...">
+      </div>
+    </div>
+
+    <hr class="text-muted my-2">
+
+    <div class="nav flex-column">
+      <a href="#overview" class="nav-link active"><i class="bi bi-info-circle"></i> 知識庫定位與隔離原則</a>
+      <a href="#cross-reference" class="nav-link"><i class="bi bi-map"></i> 108 課綱高中補充對照表</a>
+      <a href="#new-in-13th" class="nav-link"><i class="bi bi-stars text-warning"></i> 13th 新版前沿亮點總覽</a>
+      
+      <div class="text-uppercase text-muted fw-bold small mt-3 mb-1 px-2">8 大單元核心深化</div>
+      <a href="#unit1" class="nav-link"><i class="bi bi-droplet"></i> Unit 1 生命化學基礎 (Ch 1-5)</a>
+      <a href="#unit2" class="nav-link"><i class="bi bi-virus"></i> Unit 2 細胞生物學 (Ch 6-12)</a>
+      <a href="#unit3" class="nav-link"><i class="bi bi-diagram-3"></i> Unit 3 遺傳與分子生物 (Ch 13-21)</a>
+      <a href="#unit4" class="nav-link"><i class="bi bi-tree"></i> Unit 4 演化機制 (Ch 22-25)</a>
+      <a href="#unit5" class="nav-link"><i class="bi bi-flower1"></i> Unit 5 生命多樣性演化史 (Ch 26-34)</a>
+      <a href="#unit6" class="nav-link"><i class="bi bi-leaf"></i> Unit 6 植物形態與生理 (Ch 35-39)</a>
+      <a href="#unit7" class="nav-link"><i class="bi bi-heart-pulse"></i> Unit 7 動物形態與生理 (Ch 40-51)</a>
+      <a href="#unit8" class="nav-link"><i class="bi bi-globe-americas"></i> Unit 8 生態學與保育 (Ch 52-56)</a>
+    </div>
+
+    <div class="mt-4 p-3 bg-light rounded text-muted small">
+      <i class="bi bi-shield-check text-success me-1"></i> 獨立存放於 Google Drive：<br>
+      <code>AI資料庫/0生物教學/大學普通生物學補充知識庫</code>
+    </div>
+  </aside>
+
+  <!-- 主要內容區 -->
+  <main class="main-content">
+    
+    <!-- 總覽與警語 -->
+    <section id="overview" class="mb-5">
+      <div class="kb-badge-safe">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i> 嚴格隔離規範：本庫專門輔助高中教學深度備課，嚴禁直接混入高中段考常態出題以防超綱過難！
+      </div>
+      <h1 class="display-6 fw-bold mb-3" style="color: var(--primary-color);">大學普通生物學補充知識庫</h1>
+      <p class="lead text-secondary">
+        依據 <strong>Campbell Biology 13th Edition (2024 最新版)</strong> 提煉整理，專門作為高中 108 課綱生物教師深度備課、破解教材常見教學盲點、指導高三資優培訓、生物奧林匹亞 (IBO) 競賽及探究實作專題之頂尖學理後盾。
+      </p>
+
+      <div class="row g-3 mt-2">
+        <div class="col-md-4">
+          <div class="p-3 border rounded bg-white h-100">
+            <h6 class="fw-bold text-success"><i class="bi bi-book me-1"></i> 教師深度備課</h6>
+            <p class="small text-muted mb-0">解構高中教科書「點到為止」的機轉（如光反應循環電子流、ATP 合酶旋轉馬達、逆流倍增系統）。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded bg-white h-100">
+            <h6 class="fw-bold text-warning"><i class="bi bi-lightbulb me-1"></i> 破解教學迷思</h6>
+            <p class="small text-muted mb-0">釐清高能磷酸鍵實質能量來源、演化最小單位（族群而非個體）、禽類雙重呼吸單向流等常見迷思。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded bg-white h-100">
+            <h6 class="fw-bold text-primary"><i class="bi bi-stars me-1"></i> 13th 新版前沿新知</h6>
+            <p class="small text-muted mb-0">收錄 2024 諾貝爾化學獎 AI 蛋白質預測 (AlphaFold2)、CRISPR 單鹼基編輯、類器官、微塑料生態危機。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 108 課綱對照概覽 -->
+    <section id="cross-reference" class="mb-5">
+      <h3 class="fw-bold pb-2 border-bottom"><i class="bi bi-map text-success me-2"></i>108 課綱高中生物 ↔ Campbell 13th 補充對照</h3>
+      <p class="text-muted">點選章節即可快速掌握高中課程模組在大學普生中的對應深化重點與命題安全邊界：</p>
+      
+      <div class="table-responsive bg-white rounded border">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th style="width: 25%;">高中課綱模組</th>
+              <th style="width: 20%;">Campbell 13th 章節</th>
+              <th style="width: 35%;">大學普生補充核心機制</th>
+              <th style="width: 20%;">段考安全防超綱邊界</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>高一必修生物</strong><br><small class="text-muted">細胞構造、遺傳、演化、生態</small></td>
+              <td>Ch 1-10, 12-15, 22-24, 52-56</td>
+              <td>氫鍵網絡熱力學、ATP 自由能本質、哈溫平衡零模型本質</td>
+              <td><span class="badge bg-danger-subtle text-danger">嚴禁出複雜酵素名</span></td>
+            </tr>
+            <tr>
+              <td><strong>選修生物 I</strong><br><small class="text-muted">細胞與分子 (生化/呼吸/光合/分生)</small></td>
+              <td>Ch 5-11, 16-21</td>
+              <td>Z-Scheme 電子傳遞鏈、ATP 合酶 $F_0/F_1$ 旋轉、lac 操縱組雙調控、CRISPR base editing</td>
+              <td><span class="badge bg-warning-subtle text-dark">不考雙倒數作圖運算</span></td>
+            </tr>
+            <tr>
+              <td><strong>選修生物 II</strong><br><small class="text-muted">動植物形態與生理</small></td>
+              <td>Ch 35-51</td>
+              <td>水勢方程 $\Psi = \Psi_s + \Psi_p$、光敏素臨界夜長、亨利氏環逆流倍增、動作電位通道三態</td>
+              <td><span class="badge bg-warning-subtle text-dark">不考膜夾鉗電流方程</span></td>
+            </tr>
+            <tr>
+              <td><strong>選修生物 III</strong><br><small class="text-muted">演化與生態</small></td>
+              <td>Ch 22-34, 52-56</td>
+              <td>支序分類建樹 (推導 vs 解讀)、Asgard 古菌、族群增長 $r_{\max}$ vs $r_{\text{realized}}$、微塑料</td>
+              <td><span class="badge bg-info-subtle text-dark">適合素養閱讀題型</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-2 text-end">
+        <a href="高中生物補充對照表.md" class="btn btn-sm btn-outline-success">查看完整詳細雙向對照表 (.md) <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- 13th 新版亮點 -->
+    <section id="new-in-13th" class="mb-5">
+      <h3 class="fw-bold pb-2 border-bottom"><i class="bi bi-stars text-warning me-2"></i>Campbell Biology 13th (2024) 前沿亮點總覽</h3>
+      <div class="update-13th-box">
+        <h5 class="fw-bold text-primary mb-2"><i class="bi bi-cpu me-1"></i> AI 結構生物學與 2024 諾貝爾化學獎</h5>
+        <p class="mb-2">第 5、11、21 章正式將生物資訊學與人工智慧深度結合，收錄 Demis Hassabis 與 John Jumper (AlphaFold2) 以及 David Baker (計算蛋白質設計) 的諾貝爾獎成果，解析 AI 如何破解跨膜 GPCR 受體動態構型難題，並展示臨床 AI 影像與病理輔助診斷。</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="unit-card h-100">
+            <h6 class="fw-bold text-success"><i class="bi bi-scissors me-1"></i> CRISPR 臨床基因療法與單鹼基編輯</h6>
+            <p class="small text-muted mb-0">收錄 FDA 批准之 Casgevy 治療鐮形血球貧血症（重新開啟胎兒血紅素合成）；介紹不產生 DNA 雙鏈斷裂的胞嘧啶/腺嘌呤 Base Editors，降低脫靶效應。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="unit-card h-100">
+            <h6 class="fw-bold text-info"><i class="bi bi-diagram-2 me-1"></i> 系統發生樹：推導 (Inferring) vs 解讀 (Interpreting)</h6>
+            <p class="small text-muted mb-0">第 26 章徹底區分親緣樹建構依據與性狀映射，防範循環論證；第 27-28 章探討阿斯嘉古菌 (Asgard Archaea) 與真核生物起源二域樹假說。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 大單元卡片導覽 -->
+    <section id="units-section" class="mb-5">
+      <h3 class="fw-bold pb-2 border-bottom"><i class="bi bi-collection text-success me-2"></i>全書 8 大單元核心精要</h3>
+
+      <!-- Unit 1 -->
+      <div class="unit-card" id="unit1">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 1 生命的化學基礎 (Ch 1-5)</h4>
+          <span class="badge bg-secondary">p. 37 ~ 128</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 水分子 $104.5^\circ$ 動態四面體氫鍵網絡與高比熱熱力學緩衝；蛋白質折疊核心動力——疏水交互作用引起之水分子籠狀結構熵增 ($\Delta S > 0$)；$\pi-\pi$ 芳香環共軛堆疊作用對 DNA 雙螺旋穩定性的貢獻。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 脂質並非聚合物（Polymer）；蛋白質變性在特定小球蛋白（如 RNase A）去除變性劑後可自發復性 (Renaturation)。
+        </div>
+        <a href="units/Unit01_生命的化學基礎_Ch01-05.md" class="btn btn-sm btn-outline-success">閱讀 Unit 1 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 2 -->
+      <div class="unit-card" id="unit2">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 2 細胞生物學 (Ch 6-12)</h4>
+          <span class="badge bg-secondary">p. 129 ~ 291</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 膽固醇對生物膜流動性的雙向溫度緩衝；ATP 高能磷酸鍵之電荷排斥與正磷酸共振穩定度；化學滲透質子驅動力 $\Delta p$ 與 $F_0/F_1$ ATP 合酶結合變換旋轉催化；光反應 Z-Scheme 與循環電子流調節 ATP/NADPH 能荷比。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 粒線體不僅是發電廠，更是凋亡與信號決策中樞；光反應產生的氧氣 100% 來自水的光解；無氧呼吸擁有完整的電子傳遞鏈（非發酵作用）。
+        </div>
+        <a href="units/Unit02_細胞生物學_Ch06-12.md" class="btn btn-sm btn-outline-success">閱讀 Unit 2 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 3 -->
+      <div class="unit-card" id="unit3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 3 遺傳學與分子生物學 (Ch 13-21)</h4>
+          <span class="badge bg-secondary">p. 292 ~ 508</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 拓撲異構酶釋放超螺旋扭力、滑動夾 PCNA 提高聚合酶附著力、端粒酶逆轉錄；剪接體 snRNP 雙步轉酯反應形成套索結構；*lac* 操縱組「負回饋開關 (LacI) + 正調控音量鈕 (CAP-cAMP)」雙重調控。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 表型可塑性 (Phenotypic Plasticity) 證實相同基因在不同環境下具不同表現；多數突變為中性突變 (Neutral Mutations)；限制酶是原核適應性免疫的防禦機制。
+        </div>
+        <a href="units/Unit03_遺傳學與分子生物學_Ch13-21.md" class="btn btn-sm btn-outline-success">閱讀 Unit 3 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 4 -->
+      <div class="unit-card" id="unit4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 4 演化機制 (Ch 22-25)</h4>
+          <span class="badge bg-secondary">p. 509 ~ 597</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 哈溫平衡作為族群微演化之統計虛無假說 ($H_0$)；遺傳漂變二項抽樣誤差與中性等位基因固定機率（等於當前頻率 $p$）；有效族群大小 $N_e = \frac{4N_m N_f}{N_m + N_f}$ 對瀕危保育的數學限制；同源四倍體瞬間生殖隔離。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 天擇作用於個體，但演化的最小單位是「族群」；顯性基因在哈溫平衡下不會自動增多、隱性基因不會自行消失；演化並無預設終極目標或階梯式高等路線。
+        </div>
+        <a href="units/Unit04_演化機制_Ch22-25.md" class="btn btn-sm btn-outline-success">閱讀 Unit 4 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 5 -->
+      <div class="unit-card" id="unit5">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 5 生命多樣性演化史 (Ch 26-34)</h4>
+          <span class="badge bg-secondary">p. 598 ~ 803</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 共有衍生特徵 (Synapomorphy) 與最大簡約法樹拓撲運算；阿斯嘉古菌門 (Asgard Archaea) 基因體特徵蛋白印證真核起源之二域樹假說；原口動物（螺旋確定性卵裂、裂體腔）vs 後口動物（輻射不確定性卵裂、腸體腔）。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 「原生生物界」是高度多系群垃圾桶分類，已被真核超群取代；蕨類原葉體（配子體）為獨立自營個體；梳水母與海綿在動物基部起源的多元爭論。
+        </div>
+        <a href="units/Unit05_生命多樣性演化史_Ch26-34.md" class="btn btn-sm btn-outline-success">閱讀 Unit 5 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 6 -->
+      <div class="unit-card" id="unit6">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 6 植物形態與生理 (Ch 35-39)</h4>
+          <span class="badge bg-secondary">p. 804 ~ 918</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 水勢方程 $\Psi = \Psi_s + \Psi_p$ 物理計算；保衛細胞微纖絲放射環形排列與藍光活化 $H^+$-ATPase 質子幫浦湧入 $K^+$ 機轉；韌皮部伴細胞蔗糖-$H^+$ 共轉運蛋白主動裝載與膨壓集體流動；光敏素 $P_r \leftrightarrow P_{fr}$ 與臨界夜長暗期中斷。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 生長素具有嚴格雙相鐘形劑量反應曲線（高濃度促乙烯合成轉而抑制生長）；短日照植物本質是「長夜植物」；紅杉吸水 99% 靠蒸散牽引負張力而非根壓。
+        </div>
+        <a href="units/Unit06_植物形態與生理_Ch35-39.md" class="btn btn-sm btn-outline-success">閱讀 Unit 6 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 7 -->
+      <div class="unit-card" id="unit7">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 7 動物形態與生理 (Ch 40-51)</h4>
+          <span class="badge bg-secondary">p. 919 ~ 1204</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 恆定性設定點、比較器與反饋工程迴路；亨利氏環逆流倍增系統 (NKCC2 鹽轉運) 與直形微血管逆流交換；電位門控 $Na^+$ 通道活化門/去活化門雙門三態循環與不反應期；禽類肺旁支氣管單向氣流與交叉流動高效率換氣。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 單次動作電位僅改變百萬分之一離子濃度，細胞內外化學梯度未翻轉；成人日常血鈣恆定中降鈣素作用極微（13th 版移除）；抗體本身無殺菌酵素活性，需透過中和、調理與補體溶解。
+        </div>
+        <a href="units/Unit07_動物形態與生理_Ch40-51.md" class="btn btn-sm btn-outline-success">閱讀 Unit 7 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Unit 8 -->
+      <div class="unit-card" id="unit8">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="fw-bold mb-0 text-success">Unit 8 生態學與保育 (Ch 52-56)</h4>
+          <span class="badge bg-secondary">p. 1205 ~ 1339</span>
+        </div>
+        <div class="deepdive-box">
+          <strong>深化機制：</strong> 族群增長模型人均增長率動態衰減 $r_{\text{realized}} = r_{\max}(1 - N/K)$；康奈爾藤壺實驗證實基礎棲位 vs 實現棲位；演替之促進、抑制與耐受三大模型；營養級同化與生產效率計算。
+        </div>
+        <div class="misconception-box">
+          <strong>迷思破解：</strong> 現代生態學揚棄永久巔峰群集概念，採中度干擾動態非平衡態；遠洋海域浮游植物生物量金字塔常態性倒置（能量金字塔正立）；微塑料在海洋沈積物與食物網中的最新毒理數據。
+        </div>
+        <a href="units/Unit08_生態學與保育_Ch52-56.md" class="btn btn-sm btn-outline-success">閱讀 Unit 8 詳細專題 <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // 渲染 KaTeX 數學公式
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ]
+        });
+      }
+    });
+
+    // 簡易前端搜尋過濾功能
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const q = e.target.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.unit-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
